@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bark: #2b2a26;
+  --color-moss: #5f7a5f;
+  --color-sage: #7c9a7e;
+  --color-fern: #3f5c43;
+  --color-mist: #eef1ea;
+  --color-cream: #f6f4ee;
+  --color-stone: #6b6a63;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+:root {
+  --background: #f6f4ee;
+  --foreground: #2b2a26;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Lenis smooth-scroll baseline */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Marquee for the community testimonials */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 42s linear infinite;
+}
+.marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Slow Ken-Burns + atmosphere for the hero (mirrors the static prototype) */
+@keyframes kenburns {
+  0% { transform: scale(1.04) translate3d(0, 0, 0); }
+  100% { transform: scale(1.16) translate3d(0, -1.5%, 0); }
+}
+@keyframes fogA {
+  0% { transform: translate3d(-3%, 1%, 0) scale(1.05); }
+  100% { transform: translate3d(4%, -2%, 0) scale(1.12); }
+}
+@keyframes fogB {
+  0% { transform: translate3d(3%, -1%, 0) scale(1.1); }
+  100% { transform: translate3d(-4%, 2%, 0) scale(1.18); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(0.96); }
+  50% { opacity: 0.9; transform: translateX(-50%) scale(1.06); }
+}
+.hero-kenburns { animation: kenburns 44s ease-in-out infinite alternate; }
+.hero-fog-a { animation: fogA 38s ease-in-out infinite alternate; }
+.hero-fog-b { animation: fogB 52s ease-in-out infinite alternate; }
+.hero-glow { animation: glowPulse 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns, .hero-fog-a, .hero-fog-b, .hero-glow, .animate-marquee {
+    animation: none !important;
+  }
+}
